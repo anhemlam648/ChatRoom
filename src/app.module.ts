@@ -5,6 +5,13 @@ import { AppService } from './app.service';
 import { User } from '../entity/user.entity';
 import { Room } from '../entity/room.entity';
 import { Message } from '../entity/message.entity';
+import { UserController } from '../src/userController/user.controller';
+import { RoomController } from '../src/roomController/room.controller';
+import { MessageController } from '../src/messageController/message.controller';
+import { UserService } from '../src/userService/user.service';
+import { RoomService } from '../src/roomService/room.service';
+import { MessageService } from '../src/messageService/message.service';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -19,7 +26,7 @@ import { Message } from '../entity/message.entity';
     }),
     TypeOrmModule.forFeature([User, Room, Message]),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController,UserController,RoomController,MessageController],
+  providers: [AppService,UserService,RoomService,MessageService],
 })
 export class AppModule {}
