@@ -11,6 +11,7 @@ import { MessageController } from '../src/messageController/message.controller';
 import { UserService } from '../src/userService/user.service';
 import { RoomService } from '../src/roomService/room.service';
 import { MessageService } from '../src/messageService/message.service';
+import { ChatGateway } from '../src/gateway/chat.gateway';
 
 @Module({
   imports: [
@@ -27,6 +28,6 @@ import { MessageService } from '../src/messageService/message.service';
     TypeOrmModule.forFeature([User, Room, Message]),
   ],
   controllers: [AppController,UserController,RoomController,MessageController],
-  providers: [AppService,UserService,RoomService,MessageService],
+  providers: [AppService,UserService,RoomService,MessageService,ChatGateway],
 })
 export class AppModule {}
