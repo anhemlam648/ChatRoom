@@ -13,12 +13,13 @@
 
   <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
   <script>
+    //call socket
     const socket = io('http://localhost:3000/chat');
 
     // Join room
     socket.emit('joinRoom', { roomId: '1' });
 
-    // Listen for messages
+    // listen for messages
     socket.on('message', (message) => {
       const messagesDiv = document.getElementById('messages');
       const newMessage = document.createElement('div');
@@ -26,12 +27,13 @@
       messagesDiv.appendChild(newMessage);
     });
 
-    // Send message
+    // call send messager
     document.getElementById('sendButton').addEventListener('click', () => {
       const messageInput = document.getElementById('messageInput');
       const message = {
         content: messageInput.value,
-        user: { id: 1, username: 'User1' }, // Giả định user đã đăng nhập
+        //user test
+        user: { id: 1, username: 'User1' },
         room: { id: 1 }
       };
       socket.emit('message', message);

@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): string {
-    const imageUrl = '/picture.jpg';
+    const imageUrl = '../public/picture.jpg';
     // setTimeout(()=>{
     //   console.log('Async operation completed');
     // },3000);
