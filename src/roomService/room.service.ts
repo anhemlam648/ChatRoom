@@ -10,22 +10,22 @@ export class RoomService {
     private readonly roomRepository: Repository<Room>,
   ) {}
 
-  async findAll(): Promise<Room[]> {
-    return await this.roomRepository.find();
+  findAll(): Promise<Room[]> {
+    return this.roomRepository.find();
   }
 
-  async findOne(id: number): Promise<Room | undefined> {
-    return await this.roomRepository.findOne(id);
+  findOne(id: number): Promise<Room | undefined> {
+    return this.roomRepository.findOneBy({ id });
   }
 
-  async create(room: Partial<Room>): Promise<Room> {
-    const newRoom = await this.roomRepository.create(room);
-    return await this.roomRepository.save(newRoom);
+  create(room: Partial<Room>): Promise<Room> {
+    const newRoom = this.roomRepository.create(room);
+    return this.roomRepository.save(newRoom);
   }
 
-  async update(id: number, updateRoom: Partial<Room>): Promise<Room | undefined> {
-    await this.roomRepository.update(id, updateRoom);
-    return await this.findOne(id);
+  async update(id: number, room: Partial<Room>): Promise<Room | undefined> {
+    await this.roomRepository.update(id, room);
+    return this.roomRepository.findOneBy({ id });
   }
 
   async remove(id: number): Promise<void> {

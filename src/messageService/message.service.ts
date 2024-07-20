@@ -10,22 +10,22 @@ export class MessageService {
     private readonly messageRepository: Repository<Message>,
   ) {}
 
-  async findAll(): Promise<Message[]> {
-    return await this.messageRepository.find();
+  findAll(): Promise<Message[]> {
+    return this.messageRepository.find();
   }
 
-  async findOne(id: number): Promise<Message | undefined> {
-    return await this.messageRepository.findOne(id);
+  findOne(id: number): Promise<Message | undefined> {
+    return this.messageRepository.findOneBy({ id });
   }
 
-  async create(message: Partial<Message>): Promise<Message> {
-    const newMessage = await this.messageRepository.create(message);
-    return await this.messageRepository.save(newMessage);
+  create(message: Partial<Message>): Promise<Message> {
+    const newMessage = this.messageRepository.create(message);
+    return this.messageRepository.save(newMessage);
   }
 
-  async update(id: number, updateMessage: Partial<Message>): Promise<Message | undefined> {
-    await this.messageRepository.update(id, updateMessage);
-    return await this.findOne(id);
+  async update(id: number, message: Partial<Message>): Promise<Message | undefined> {
+    await this.messageRepository.update(id, message);
+    return this.messageRepository.findOneBy({ id });
   }
 
   async remove(id: number): Promise<void> {

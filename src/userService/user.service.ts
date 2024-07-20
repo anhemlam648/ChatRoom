@@ -10,22 +10,22 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async findAll(): Promise<User[]> {
-    return await this.userRepository.find();
+  findAll(): Promise<User[]> {
+    return this.userRepository.find();
   }
 
-  async findOne(id: number): Promise<User | undefined> {
-    return await this.userRepository.findOne(id);
+  findOne(id: number): Promise<User | undefined> {
+    return this.userRepository.findOneBy({ id });
   }
 
-  async create(user: Partial<User>): Promise<User> {
-    const newUser = await this.userRepository.create(user);
-    return await this.userRepository.save(newUser);
+  create(user: Partial<User>): Promise<User> {
+    const newUser = this.userRepository.create(user);
+    return this.userRepository.save(newUser);
   }
 
-  async update(id: number, updateUser: Partial<User>): Promise<User | undefined> {
-    await this.userRepository.update(id, updateUser);
-    return await this.findOne(id);
+  async update(id: number, user: Partial<User>): Promise<User | undefined> {
+    await this.userRepository.update(id, user);
+    return this.userRepository.findOneBy({ id });
   }
 
   async remove(id: number): Promise<void> {

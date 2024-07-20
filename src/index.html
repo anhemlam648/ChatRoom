@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Room</title>
+</head>
+<body>
+  <h1>Chat Room</h1>
+  <div id="messages"></div>
+  <input type="text" id="messageInput" placeholder="Type a message">
+  <button id="sendButton">Send</button>
+
+  <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+  <script>
+    const socket = io('http://localhost:3000/chat');
+
+    // Join room
+    socket.emit('joinRoom', { roomId: '1' });
+
+    // Listen for messages
+    socket.on('message', (message) => {
+      const messagesDiv = document.getElementById('messages');
+      const newMessage = document.createElement('div');
+      newMessage.textContent = `${message.user.username}: ${message.content}`;
+      messagesDiv.appendChild(newMessage);
+    });
+
+    // Send message
+    document.getElementById('sendButton').addEventListener('click', () => {
+      const messageInput = document.getElementById('messageInput');
+      const message = {
+        content: messageInput.value,
+        user: { id: 1, username: 'User1' }, // Giả định user đã đăng nhập
+        room: { id: 1 }
+      };
+      socket.emit('message', message);
+      messageInput.value = '';
+    });
+  </script>
+</body>
+</html>
