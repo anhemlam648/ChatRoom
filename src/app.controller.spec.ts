@@ -20,4 +20,27 @@ describe('AppController', () => {
   //   });
   // });
   
+  //check method getHomePage
+  it('should send the homePage.html file', () => {
+    const res = {
+      sendFile: jest.fn()
+    } as unknown as Response;
+
+    appController.getHomePage(res);
+
+    expect(res.sendFile).toHaveBeenCalledWith(join(__dirname, '..', 'public', 'homePage.html'));
+  });
+
+   //check method getChatRoom
+  it('should send the chatRoom.html file', () => {
+    const res = {
+      sendFile: jest.fn()
+    } as unknown as Response;
+
+    appController.getChatRoom(res);
+
+    expect(res.sendFile).toHaveBeenCalledWith(join(__dirname, '..', 'public', 'chatRoom.html'));
+  });
+
+  
 });
