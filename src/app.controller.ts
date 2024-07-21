@@ -10,8 +10,13 @@ export class AppController {
   // getHello(): string {
   //   res.sendFile(join(__dirname, '..', 'public', './public/index.html'));
   // }
-  @Get()
+  @Get('homePage')
+  getHomePage(@Res() res: Response): void {
+    res.sendFile(join(__dirname, '..', 'public', 'homePage.html'));
+  }
+  
+  @Get('chatRoom')
   getHello(@Res() res: Response): void {
-    res.sendFile(join(__dirname, '..', 'public', 'index.html'));
+    res.sendFile(join(__dirname, '..', 'public', 'chatRoom.html'));
   }
 }
