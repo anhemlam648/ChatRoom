@@ -19,4 +19,9 @@ export class AppController {
   getHello(@Res() res: Response): void {
     res.sendFile(join(__dirname, '..', 'public', 'chatRoom.html'));
   }
+  @Get('login')
+  getLoginPage(@Res() res: Response): void {
+    res.sendFile(join(__dirname, '..', 'public', 'login.html'));
+  }
+
 }

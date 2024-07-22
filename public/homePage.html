@@ -7,8 +7,26 @@
 </head>
 <body>
     <h1>Available Chat Rooms</h1>
+    <div class="login" onclick="login()">Login</div>
+    <div id="user-info"></div>
     <div id="rooms"></div>
     <script>
+      function login() {
+            window.location.href = '/login';
+        }
+        //get id User
+        function displayUserInfo() {
+            const userId = sessionStorage.getItem("userId");
+            if (userId) {
+                const userEmail = sessionStorage.getItem("userId");
+                document.getElementById('user-info').textContent = `Logged in as: ${userEmail}`;
+            }
+        }
+        //remove session 
+        function logout() {
+            sessionStorage.removeItem("userId");
+            window.location.href = './homePage.html';
+        }
         async function loadRooms(){
             const response = await fetch('/room');
             const rooms = await response.json();
@@ -19,7 +37,7 @@
                 const joinButton = document.createElement('button');
                 joinButton.textContent = 'Join';
                 joinButton.onclick = () => {
-                    window.location.href = `/chat.html?roomId=${room.id}`;
+                    window.location.href = `./chatRoom.html?roomId=${room.id}`;
                 };
                 roomDiv.appendChild(joinButton);
                 roomsDiv.appendChild(roomDiv);

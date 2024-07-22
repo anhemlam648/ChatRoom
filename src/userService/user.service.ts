@@ -31,4 +31,19 @@ export class UserService {
   async remove(id: number): Promise<void> {
     await this.userRepository.delete(id);
   }
+
+  async login(email: string, password: string): Promise<User | null> {
+    const user = await this.userRepository.findOne({ where: { email, password } });
+    return user || null;
+  }
+  //check login api
+  @Post('/login')
+  async login(@Body() loginDto: { email: string, password: string }, @Res() res: Response): Promise<void> {
+    const user = await this.userService.login(loginDto.email, loginDto.password);
+    if (user) {
+      res.status(HttpStatus.OK).json(user);
+    } else {
+      throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
+    }
+  }
 }
