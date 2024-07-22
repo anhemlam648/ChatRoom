@@ -22,6 +22,22 @@
                 document.getElementById('user-info').textContent = `Logged in as: ${userEmail}`;
             }
         }
+        // check user login
+        function displayAuthButtons() {
+            const authButtonsDiv = document.getElementById('auth-buttons');
+            const userId = sessionStorage.getItem("userId");
+            if (userId) {
+                const logoutButton = document.createElement('button');
+                logoutButton.textContent = 'Logout';
+                logoutButton.onclick = logout;
+                authButtonsDiv.appendChild(logoutButton);
+            } else {
+                const loginButton = document.createElement('button');
+                loginButton.textContent = 'Login';
+                loginButton.onclick = login;
+                authButtonsDiv.appendChild(loginButton);
+            }
+        }
         //remove session 
         function logout() {
             sessionStorage.removeItem("userId");
@@ -44,7 +60,10 @@
 
                 });
         }
+        displayAuthButtons();
         loadRooms();
+        // logout();
+        displayUserInfo();
     </script>
 </body>
 </html>
