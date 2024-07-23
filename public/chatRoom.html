@@ -17,6 +17,12 @@
     const userId = sessionStorage.getItem("userId");
     const username = sessionStorage.getItem("userEmail");
 
+    //check userId and username
+    if (!userId || !username) {
+      alert("You must be logged in to join a chat room.");
+      window.location.href = './homePage.html';
+    }
+
     //call socket
     const socket = io('http://localhost:3000/chat');
 
