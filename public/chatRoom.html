@@ -23,11 +23,19 @@
       window.location.href = './homePage.html';
     }
 
+    //create const roomId and check room
+    const roomId = new URLSearchParams(window.location.search).get('roomId');
+    if (!roomId) {
+      alert("Room ID is missing.");
+      window.location.href = './homePage.html';
+    }
+    
+
     //call socket
     const socket = io('http://localhost:3000/chat');
 
     // Join room
-    socket.emit('joinRoom', { roomId: '1' });
+    socket.emit('joinRoom', { roomId });
 
     // listen for messages
     socket.on('message', (message) => {
@@ -42,9 +50,9 @@
       const messageInput = document.getElementById('messageInput');
       const message = {
         content: messageInput.value,
-        //user test
-        user: { id: 1, username: 'User1' },
-        room: { id: 1 }
+        //user
+        user: { id: userId, username },
+        room: { id: roomId }
       };
       socket.emit('message', message);
       messageInput.value = '';
