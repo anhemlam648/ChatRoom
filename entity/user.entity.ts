@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Room } from './room.entity';
 import { Message } from './message.entity';
-
+import { Notification } from '../src/notification/notification.entity';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -21,4 +21,7 @@ export class User {
 
   @OneToMany(() => Message, message => message.user)
   messages: Message[];
+
+  @OneToMany(() => Notification, notification => notification.user)
+  notifications: Notification[];
 }
