@@ -12,7 +12,8 @@ import { UserService } from '../src/userService/user.service';
 import { RoomService } from '../src/roomService/room.service';
 import { MessageService } from '../src/messageService/message.service';
 import { ChatGateway } from '../src/gateway/chat.gateway';
-
+import { NotificationController } from '../src/notificationController/notification.controller';
+import { NotificationService } from './notificationService/notification.service';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -27,7 +28,7 @@ import { ChatGateway } from '../src/gateway/chat.gateway';
     }),
     TypeOrmModule.forFeature([User, Room, Message]),
   ],
-  controllers: [AppController,UserController,RoomController,MessageController],
-  providers: [AppService,UserService,RoomService,MessageService,ChatGateway],
+  controllers: [AppController,UserController,RoomController,MessageController,NotificationController],
+  providers: [AppService,UserService,RoomService,MessageService,ChatGateway,NotificationService],
 })
 export class AppModule {}
